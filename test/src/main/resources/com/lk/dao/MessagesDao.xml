@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lk.dao.MessagesDao" >
+  <resultMap id="BaseResultMap" type="com.lk.pojo.Messages" >
+    <id column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="from_user_id" property="fromUserId" jdbcType="INTEGER" />
+    <result column="to_user_id" property="toUserId" jdbcType="INTEGER" />
+    <result column="target_type" property="targetType" jdbcType="TINYINT" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+    <result column="target_message" property="targetMessage" jdbcType="VARCHAR" />
+    <result column="extra_message" property="extraMessage" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+ 
+  <select id="selectUser" resultType="java.lang.String">
+  		SELECT nickname from users_info LIMIT 1
+  </select>
+  
+  <select id="selectHouse" resultType="java.lang.String">
+  		SELECT house_name from house_info LIMIT 1
+  </select>
+ 
+ <select id="selectMapData" resultType="map">
+  	SELECT plate,longitude as y,latitude as x from grabdata.lianjia_sh 
+  	where longitude>0 AND latitude>0 AND plate IS NOT NULL
+ </select>
+ 
+  <select id="selectpointList" resultType="map">
+	  	SELECT loc_type, loc_id AS id, lng as y, lat as x from sh_shouseapp_pre.location 
+		where lng>0 AND lat>0 
+		<if test="loc_type !=null ">
+			AND loc_type=#{loc_type}
+		</if>
+  </select>
+</mapper>
