@@ -1,9 +1,0 @@
-test\JedisUtilTest.class
-test\TaskException.class
-test\Runner.class
-test\HelloWorldTest.class
-test\ExecutorServiceTest.class
-test\RedisAPI.class
-test\CyclicBarrierTest.class
-test\ThreadLocalDemo.class
-test\TaskWithResult.class
