@@ -14,14 +14,11 @@ import com.lk.service.TestService;
 import com.lk.util.OResultVO;
 
 @RestController
-public class HelloWorld {
+public class MapDataAction {
 	
 	@Autowired
 	private TestService testService;
 	
-	public String sayHello(){
-		return "hello Maven";
-	}
 	
 	@RequestMapping(value = "/test" ,method = RequestMethod.GET)
 	@ResponseBody
