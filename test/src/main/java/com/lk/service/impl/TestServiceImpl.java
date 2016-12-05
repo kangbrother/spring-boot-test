@@ -87,6 +87,7 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public OResultVO getMapData(Integer loc_type) {
 		try {
+			Map<String, Object> maxPoint = messagesDao.selectMap_Max_Min_point();
 			List<Map<String,Object>> points = messagesDao.selectpointList(loc_type);
 			List<Map<String,Object>> maplist = messagesDao.selectMapData();
 			Map<String,List<Map<String,Object>>> mapData = new HashMap<String, List<Map<String,Object>>>();
@@ -101,6 +102,7 @@ public class TestServiceImpl implements TestService {
 				}
 			}
 			Map<String, Object> result=new HashMap<String, Object>();
+			result.put("maxPoint", maxPoint);
 			result.put("points", points);
 			result.put("mapData", mapData);
 			return new OResultVO(true, 200, result);

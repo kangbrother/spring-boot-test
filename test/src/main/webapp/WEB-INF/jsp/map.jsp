@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!doctype html>
 <html>
 <head>
-<meta charset="gb2312">
 <title>画图</title>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/map_sf.js"></script>
@@ -16,42 +15,20 @@
     var myCanvas = document.getElementById("myCanvas");
     var context =  myCanvas.getContext("2d");
 	var plateMap={};
+	var maxminPoint={};
 	
-		function getMin(list){
-			max_x = -10000000000.0; 
-			min_x = 10000000000.0;
-			max_y = -10000000000.0;
-			min_y = 10000000000.0;
-			/* for(i = 0;i < list.length; i ++)
-			{
-				 var screenPoint = list[i];
-				 if(screenPoint.x<min_x){
-						min_x =screenPoint.x;
-				 }
-			     if(screenPoint.y<min_y){
-						min_y = screenPoint.y;
-				 }
-
-				 if(screenPoint.x>max_x){
-						
-						max_x =screenPoint.x;
-				 }
-			     if(screenPoint.y>max_y){
-						
-						max_y = screenPoint.y;
-				 }
-				
-			} */
-			min_x =30.69455;
-			min_y = 120.868383;
-			max_x = 31.611412;
-			max_y = 121.984869;
+	   function initMaxminPoint(){
+			
+			min_x = maxminPoint.min_x;
+			min_y = maxminPoint.min_y;
+			max_x = maxminPoint.max_x;
+			max_y = maxminPoint.max_y;
 		}
       
         function drawPath(point,list,plate)
         {
         		//context.clearRect(0, 0, 2000, 1000);//清理画布
-                getMin(list);//初始化最大值最小值
+                initMaxminPoint();//初始化最大值最小值
                 
 				mapCenter();//地图居中
                 context.fillStyle ='rgba(255,0,0,.3)';//填充红色，半透明
@@ -131,6 +108,7 @@
 				success: function (data) {
 					if(data.success){
 						debugger;
+						maxminPoint = data.context.maxPoint;
 						var points = data.context.points;
 						var mapData = data.context.mapData;
 						for(j=0;j<points.length; j++){

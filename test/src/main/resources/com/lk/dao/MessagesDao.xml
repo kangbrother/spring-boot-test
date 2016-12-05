@@ -33,4 +33,9 @@
 			AND loc_type=#{loc_type}
 		</if>
   </select>
+  
+  <select id="selectMap_Max_Min_point" resultType="map">
+  		SELECT MAX(longitude) as max_y, MIN(longitude) as min_y, MAX(latitude) as max_x, MIN(latitude) as min_x from grabdata.lianjia_sh 
+  	where longitude>0 AND latitude>0 AND plate IS NOT NULL
+  </select>
 </mapper>
